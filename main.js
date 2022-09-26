@@ -402,7 +402,7 @@ const property_i=(i,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descripto
 
 //# sourceMappingURL=decorators.js.map
 
-;// CONCATENATED MODULE: ./src/app.ts
+;// CONCATENATED MODULE: ./src/coinTrackingApp.ts
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -412,13 +412,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var App_1;
+var CoinTrackingApp_1;
 
 
 
 
 // import   './portfolioState';
-let App = App_1 = class App extends lit_element_s {
+let CoinTrackingApp = CoinTrackingApp_1 = class CoinTrackingApp extends lit_element_s {
     /**
     *
     */
@@ -461,14 +461,15 @@ let App = App_1 = class App extends lit_element_s {
         const jsonOrders = await response.json();
         let myorders = [];
         jsonOrders.forEach(order => {
-            myorders.push(order);
+            if (order.Platform != 'GOLD' && !order.Symbol.includes('GOLD'))
+                myorders.push(order);
         });
         const prices = await this._baseController.getCurrentPrice();
         this._coinPrices = prices;
         this._orders = myorders;
         this._myOrders = myorders;
         this._allOrders = myorders;
-        App_1.AllOrders = myorders;
+        CoinTrackingApp_1.AllOrders = myorders;
         this._orders = this._baseController.filterOrders(this._allOrders, this._coinPrices, true);
         this._currentOrders = this._orders;
         this.requestUpdate();
@@ -567,12 +568,10 @@ let App = App_1 = class App extends lit_element_s {
     }
     render() {
         return y `
-
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
     <div>      
       <nav class="navbar navbar-expand-lg bg-light btn-primary">
       <div class="container-fluid">
@@ -594,9 +593,7 @@ let App = App_1 = class App extends lit_element_s {
             <li class="nav-item">
               <a class="nav-link" href="#"  @click="${this.showHotBit}">Hotbit</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"  @click="${this.showGold}">Gold</a>
-            </li>
+             
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Data
@@ -640,10 +637,7 @@ let App = App_1 = class App extends lit_element_s {
         </li>
         <li class="col-2">
           <a class="nav-link" href="#"  @click="${this.showHotBit}">Hotbit</a>
-        </li>
-        <li class="col-2">
-          <a class="nav-link" href="#"  @click="${this.showGold}">Gold</a>
-        </li>    
+        </li>        
           
       </ul>
     </div>
@@ -701,23 +695,23 @@ let App = App_1 = class App extends lit_element_s {
 __decorate([
     property_e({ type: Boolean }),
     __metadata("design:type", Object)
-], App.prototype, "show", void 0);
+], CoinTrackingApp.prototype, "show", void 0);
 __decorate([
     property_e({ type: Boolean }),
     __metadata("design:type", Object)
-], App.prototype, "_showBtn", void 0);
+], CoinTrackingApp.prototype, "_showBtn", void 0);
 __decorate([
     property_e({ type: Number }),
     __metadata("design:type", Object)
-], App.prototype, "_sumTotalFiat", void 0);
+], CoinTrackingApp.prototype, "_sumTotalFiat", void 0);
 __decorate([
     property_e({ type: Number }),
     __metadata("design:type", Object)
-], App.prototype, "_sumRightTotalFiat", void 0);
-App = App_1 = __decorate([
+], CoinTrackingApp.prototype, "_sumRightTotalFiat", void 0);
+CoinTrackingApp = CoinTrackingApp_1 = __decorate([
     custom_element_e('coin-tracking-app'),
     __metadata("design:paramtypes", [])
-], App);
+], CoinTrackingApp);
 
 
 ;// CONCATENATED MODULE: ./src/index.ts
